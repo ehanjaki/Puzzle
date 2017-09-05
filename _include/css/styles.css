@@ -37,168 +37,109 @@ body {
   top: 10px;
 }
 
+.box1{
+  width: 900px;
+  height:420px;
+  display: inline-block;
+  padding-top: 20px;
+}
+
 .setka {
   width: 375px;
   height: 375px;
-  position: relative;
-  margin: 30px;
+  float: left;
+  margin-left: 30px;
+  margin-top: 10px;
+}
+
+.setka .b{
+  width: 120px;
+  height: 120px;
+  float: left;
+  border: 1px solid blue;
 }
 
 .setka .b1{
-  width: 120px;
-  height: 120px;
-  border: 1px solid blue;
   border-right: none;
   border-bottom: none;
-  float: left;
 }
 
 .setka .b2{
-  width: 120px;
-  height: 120px;
-  border: 1px solid blue;
   border-bottom: none;
   border-right: none;
-  float: left;
 }
 
 .setka .b3{
-  width: 120px;
-  height: 120px;
-  border: 1px solid blue;
   border-bottom: none;
-  float: left;
 }
 
 .setka .b4{
-  width: 120px;
-  height: 120px;
-  border: 1px solid blue;
   border-right: none;
   border-bottom: none;
-  float: left;
 }
 
 .setka .b5{
-  width: 120px;
-  height: 120px;
-  border: 1px solid blue;
   border-right: none;
   border-bottom: none;
-  float: left;
 }
 
 .setka .b6{
-  width: 120px;
-  height: 120px;
-  border: 1px solid blue;
   border-bottom: none;
-  float: left;
 }
 
 .setka .b7{
-  width: 120px;
-  height: 120px;
   border: 1px solid blue;
   border-right: none;
-  float: left;
 }
 
 .setka .b8{
-  width: 120px;
-  height: 120px;
-  border: 1px solid blue;
   border-right: none;
-  float: left;
-}
-
-.setka .b9{
-  width: 120px;
-  height: 120px;
-  border: 1px solid blue;
-  float: left;
 }
 
 .box {
-  width: 380px;
-  height: 380px;
-  margin-left: 550px;
-  margin-top: -410px;
+  width: 400px;
+  height: 400px;
+  margin-left: 480px;
+}
+
+.box .img{
   position: absolute;
+  width: 120px;
+  height: 120px;
 }
 
 .box .img1{
-  margin: 2px;
-  width: 120px;
-  height: 120px;
   background-image: url('../img/0_0.png');
-  float: left;
 }
 
 .box .img2{
-  margin: 2px;
-  width: 120px;
-  height: 120px;
   background-image: url('../img/0_1.png');
-  float: left;
 }
 
 .box .img3{
-  margin: 2px;
-  width: 120px;
-  height: 120px;
   background-image: url('../img/0_2.png');
-  float: left;
 }
 
 .box .img4{
-  margin: 2px;
-  width: 120px;
-  height: 120px;
   background-image: url('../img/1_0.png');
-  float: left;
 }
 
 .box .img5{
-  margin: 2px;
-  width: 120px;
-  height: 120px;
   background-image: url('../img/1_1.png');
-  float: left;
 }
 
 .box .img6{
-  margin: 2px;
-  width: 120px;
-  height: 120px;
   background-image: url('../img/1_2.png');
-  float: left;
 }
 
 .box .img7{
-  margin: 2px;
-  width: 120px;
-  height: 120px;
   background-image: url('../img/2_0.png');
-  float: left;
 }
 
 .box .img8{
-  margin: 2px;
-  width: 120px;
-  height: 120px;
   background-image: url('../img/2_1.png');
-  float: left;
 }
 
 .box .img9{
-  margin: 2px;
-  width: 120px;
-  height: 120px;
   background-image: url('../img/2_2.png');
-  float: left;
-}
-
-button{
-
 }
