@@ -38,15 +38,15 @@ body {
 }
 
 .box1{
-  width: 900px;
+  width: 950px;
   height:420px;
   display: inline-block;
   padding-top: 25px;
 }
 
 .setka {
-  width: 380px;
-  height: 380px;
+  width: 360px;
+  height: 360px;
   display: inline-block;
 }
 
@@ -55,6 +55,7 @@ body {
   height: 120px;
   float: left;
   border: 1px solid blue;
+  box-sizing: border-box;
 }
 
 .setka .b0{
@@ -86,7 +87,6 @@ body {
 }
 
 .setka .b6{
-  border: 1px solid blue;
   border-right: none;
 }
 
@@ -95,14 +95,18 @@ body {
 }
 
 .box {
+  width: 360px;
+  height: 360px;
+  position: relative;
   display: inline-block;
-  margin-left: 500px;
+  margin-left: 150px;
 }
 
 .box .img{
   position: absolute;
   width: 120px;
   height: 120px;
+  box-sizing: border-box;
 }
 
 .box .img0{
