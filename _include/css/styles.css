@@ -26,7 +26,7 @@ body {
   background-color: rgb(252, 243, 205);
   position: relative;
   margin: 0 auto;
-  top: 30px;
+  top: 50px;
 }
 
 .scene .title {
@@ -42,12 +42,15 @@ body {
   height:420px;
   display: inline-block;
   padding-top: 25px;
+  position: relative;
 }
 
 .setka {
   width: 360px;
   height: 360px;
   display: inline-block;
+  position: relative;
+  margin-right: 150px;
 }
 
 .setka .b{
@@ -99,7 +102,6 @@ body {
   height: 360px;
   position: relative;
   display: inline-block;
-  margin-left: 150px;
 }
 
 .box .img{
