@@ -27,30 +27,24 @@ $(document).ready(function() {
       parent = $('body');
 
   elems.on('mousedown', function(event) {
-    var elem = $(this);
-    pos = getCoords(elem);
-    var coords = getCoords(elem),
-        shiftX = event.pageX - coords.left,
-        shiftY = event.pageY - coords.top;
+    var elem = $(this)
+        pos = elem.position();
+        shiftX = event.pageX - pos.left,
+        shiftY = event.pageY - pos.top;
 
     parent.on('mousemove', function(event) {
-      new_coords = {
-        left: event.pageX - shiftX,
-        top: event.pageY - shiftY
-      }
+      pos = newCoord(shiftX, shiftY);
       new_coords = positionElem(new_coords, data);
       elem.css(new_coords);
     });
 
     parent.on('mouseup', function(event) {
       parent.off("mouseup")
-
-      new_coords = {
-        left: event.pageX - shiftX,
-        top: event.pageY - shiftY
-      }
-      pos = posElem(elem, new_coords, data);
       parent.off("mousemove")
+      pos = newCoord(shiftX, shiftY);
+      if (mouseupInScene(new_coords, data)){
+        pos = posReturn(elem);
+      }
     });
   });
 });

@@ -4,12 +4,12 @@ function getRand() {
     return {left: left, top: top};
 }
 
-function getCoords(elem) {
-  var pos = elem.position();
-  return {
-    top: pos.top + pageYOffset,
-    left: pos.left + pageXOffset
-  };
+function newCoord(shiftX, shiftY) {
+  new_coords = {
+    left: event.pageX - shiftX,
+    top: event.pageY - shiftY
+  }
+  return new_coords;
 }
 
 function positionElem(new_coords, data) {
@@ -28,24 +28,19 @@ function positionElem(new_coords, data) {
   return new_coords;
 }
 
-function posElem(elem, new_coords, data){
-  function posReturn(elem){
-    pos = elem.data().begin_pos;
-    elem.animate({left: pos.left, top: pos.top}, 500, function() {
-    });
-    return pos;
+function mouseupInScene(new_coords, data){
+  if((new_coords.left < 0 ) || (new_coords.left > data.scene.width() - 120) ||
+  (new_coords.top < 0 ) || (new_coords.top > data.scene.height() - 120)){
+    return true;
   }
-  if(new_coords.left < 0 ){
-    posReturn(elem);
+  else {
+    return false;
   }
-  else if(new_coords.left > data.scene.width() - 120){
-    posReturn(elem);
-  }
-  if(new_coords.top < 0 ){
-     posReturn(elem);
-  }
-  else if(new_coords.top > data.scene.height() - 120){
-     posReturn(elem);
-  }
-  return new_coords;
+}
+
+function posReturn(elem){
+  pos = elem.data().begin_pos;
+  elem.animate({left: pos.left, top: pos.top}, 500, function() {
+  });
+  return pos;
 }
