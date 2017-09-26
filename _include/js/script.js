@@ -11,6 +11,7 @@ $(document).ready(function() {
   for (var i = 0; i < 9; i++) {
     var b = $("<div>", {class: "img img" +i});
     pos = getRand();
+    b.data({begin_pos: pos});
     b.css(pos);
     b.appendTo(data.box);
     data.c.push(b);
@@ -22,43 +23,34 @@ $(document).ready(function() {
     data.s.push(a);
   }
 
-  var elems = $('.img');
-  var parent = $('.scene');
-
-  function getCoords(elem) {
-    var pos = elem.get(0).getBoundingClientRect();
-    return {
-      top: pos.top + pageYOffset,
-      left: pos.left + pageXOffset
-    };
-  }
+  var elems = $('.img'),
+      parent = $('body');
 
   elems.on('mousedown', function(event) {
-
-    var coords = getCoords(elems);
-    var shiftX = event.pageX - coords.left;
-    var shiftY = event.pageY - coords.top;
-
-    elems.css.position = 'absolute';
-    moveAt(event);
-
-    function moveAt(event) {
-      elems.css.left = event.pageX - shiftX + 'px';
-      elems.css.top = event.pageY - shiftY + 'px';
-    }
+    var elem = $(this);
+    pos = getCoords(elem);
+    var coords = getCoords(elem),
+        shiftX = event.pageX - coords.left,
+        shiftY = event.pageY - coords.top;
 
     parent.on('mousemove', function(event) {
-      moveAt(event);
+      new_coords = {
+        left: event.pageX - shiftX,
+        top: event.pageY - shiftY
+      }
+      new_coords = positionElem(new_coords, data);
+      elem.css(new_coords);
     });
 
-    elems.on('mouseup', function() {
-      elems.off("mouseup")
+    parent.on('mouseup', function(event) {
+      parent.off("mouseup")
+
+      new_coords = {
+        left: event.pageX - shiftX,
+        top: event.pageY - shiftY
+      }
+      pos = posElem(elem, new_coords, data);
       parent.off("mousemove")
     });
   });
-
-  elems.on('dragstart', function() {
-    return false;
-  });
-  console.log(elems);
 });

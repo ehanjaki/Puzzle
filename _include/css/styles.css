@@ -7,8 +7,9 @@
 }
 
 /*Отключить стандартные отступы тела страницы*/
-body {
+html, body {
   margin: 0;
+  height: 100%;
 }
 
 .container{
@@ -42,7 +43,6 @@ body {
   height:420px;
   display: inline-block;
   padding-top: 25px;
-  position: relative;
 }
 
 .setka {
@@ -100,7 +100,6 @@ body {
 .box {
   width: 360px;
   height: 360px;
-  position: relative;
   display: inline-block;
 }
 
