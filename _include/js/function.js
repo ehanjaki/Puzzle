@@ -44,3 +44,20 @@ function posReturn(elem){
   });
   return pos;
 }
+
+function mouseupInSetka(setka, new_coords) {
+  var pos = setka.position();
+  if ((new_coords.left > pos.left + 360) || (new_coords.top > pos.top + 360)){
+    return true;
+  }
+  else {
+    return false;
+  }
+}
+
+function returnElemIsSetka(elem){
+  pos = elem.data().setka_pos;
+  elem.animate({left: pos.left, top: pos.top}, 500, function() {
+  });
+  return pos;
+}

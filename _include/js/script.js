@@ -7,7 +7,6 @@ $(document).ready(function() {
   data.c = []
   data.s = []
 
-  var c = []
   for (var i = 0; i < 9; i++) {
     var b = $("<div>", {class: "img img" +i});
     pos = getRand();
@@ -17,14 +16,16 @@ $(document).ready(function() {
     data.c.push(b);
   }
 
-  var s = []
   for (var i = 0; i < 9; i++) {
     var a = $("<div>").addClass("b b" +i).appendTo(data.setka);
+    pos = a.position();
+    b.data({setka_pos: pos});
     data.s.push(a);
   }
-
   var elems = $('.img'),
-      parent = $('body');
+      parent = $('body'),
+      setka = $('.setka'),
+      cell = $('.b');
 
   elems.on('mousedown', function(event) {
     var elem = $(this)
@@ -45,6 +46,12 @@ $(document).ready(function() {
       if (mouseupInScene(new_coords, data)){
         pos = posReturn(elem);
       }
+      if (mouseupInSetka(setka, new_coords)){
+        pos = posReturn(elem);
+      }
+     else {
+        pos = returnElemIsSetka(elem);
+     }
     });
   });
 });
