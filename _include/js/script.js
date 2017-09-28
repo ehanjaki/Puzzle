@@ -19,13 +19,13 @@ $(document).ready(function() {
   for (var i = 0; i < 9; i++) {
     var a = $("<div>").addClass("b b" +i).appendTo(data.setka);
     pos = a.position();
-    b.data({setka_pos: pos});
+    a.data({cell_pos: pos});
     data.s.push(a);
+    pos = data.s[i].data().cell_pos
   }
   var elems = $('.img'),
       parent = $('body'),
-      setka = $('.setka'),
-      cell = $('.b');
+      setka = $('.setka');
 
   elems.on('mousedown', function(event) {
     var elem = $(this)
@@ -46,12 +46,28 @@ $(document).ready(function() {
       if (mouseupInScene(new_coords, data)){
         pos = posReturn(elem);
       }
-      if (mouseupInSetka(setka, new_coords)){
+      if (mouseupInSetka(setka, new_coords, data)){
         pos = posReturn(elem);
       }
-     else {
-        pos = returnElemIsSetka(elem);
-     }
+
+      active_cell = false
+      for (var i = 0; i < 9; i++) {
+        cell = data.s[i]
+        if (posElemIsSetka(elem, cell)) {
+          active_cell = cell;
+          break;
+        }
+      }
+      if ((active_cell) && (!(cell.hasClass("placed")))) {
+        animateElemMove(elem, active_cell.data().cell_pos)
+        cell.addClass("placed")
+        elem.on('mousedown', function(event){
+          cell.removeClass("placed");
+        })
+      }
+      else {
+        animateElemMove(elem, elem.data().begin_pos)
+      }
     });
   });
 });

@@ -45,9 +45,9 @@ function posReturn(elem){
   return pos;
 }
 
-function mouseupInSetka(setka, new_coords) {
+function mouseupInSetka(setka, new_coords, data) {
   var pos = setka.position();
-  if ((new_coords.left > pos.left + 360) || (new_coords.top > pos.top + 360)){
+  if ((new_coords.left > pos.left + data.setka.width()) || (new_coords.top > pos.top + data.setka.height())){
     return true;
   }
   else {
@@ -55,9 +55,29 @@ function mouseupInSetka(setka, new_coords) {
   }
 }
 
-function returnElemIsSetka(elem){
-  pos = elem.data().setka_pos;
-  elem.animate({left: pos.left, top: pos.top}, 500, function() {
-  });
-  return pos;
+function posElemIsSetka(elem, cell) {
+  pos = elem.position()
+  center_pos = {
+    left: pos.left + elem.width()/2,
+    top: pos.top + elem.height()/2,
+  }
+
+  cell_pos = cell.data().cell_pos
+  cell_size = {
+    width: cell.width(),
+    height: cell.height()
+  }
+
+  res = false
+
+  if ((center_pos.left > cell_pos.left) && (center_pos.left < cell_pos.left + cell_size.width) &&
+      (center_pos.top > cell_pos.top) && (center_pos.top < cell_pos.top + cell_size.height)) {
+    res = true
+  }
+
+  return res;
+};
+
+function animateElemMove(elem, pos) {
+  elem.animate({left: pos.left, top: pos.top}, 500, function(){});
 }
