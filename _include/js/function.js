@@ -45,16 +45,6 @@ function posReturn(elem){
   return pos;
 }
 
-function mouseupInSetka(setka, new_coords, data) {
-  var pos = setka.position();
-  if ((new_coords.left > pos.left + data.setka.width()) || (new_coords.top > pos.top + data.setka.height())){
-    return true;
-  }
-  else {
-    return false;
-  }
-}
-
 function posElemIsSetka(elem, cell) {
   pos = elem.position()
   center_pos = {

@@ -24,11 +24,16 @@ $(document).ready(function() {
     pos = data.s[i].data().cell_pos
   }
   var elems = $('.img'),
-      parent = $('body'),
-      setka = $('.setka');
+      parent = $('body');
+
+
 
   elems.on('mousedown', function(event) {
-    var elem = $(this)
+    var elem = $(this);
+    pos = elem.data().cell_act;
+    if (typeof elem.data().cell_act != "undefined") {
+      pos.removeClass("placed");
+    }
         pos = elem.position();
         shiftX = event.pageX - pos.left,
         shiftY = event.pageY - pos.top;
@@ -46,9 +51,6 @@ $(document).ready(function() {
       if (mouseupInScene(new_coords, data)){
         pos = posReturn(elem);
       }
-      if (mouseupInSetka(setka, new_coords, data)){
-        pos = posReturn(elem);
-      }
 
       active_cell = false
       for (var i = 0; i < 9; i++) {
@@ -58,12 +60,10 @@ $(document).ready(function() {
           break;
         }
       }
-      if ((active_cell) && (!(cell.hasClass("placed")))) {
+      if ((active_cell) && (!(active_cell.hasClass("placed")))) {
+        elem.data({cell_act: cell});
         animateElemMove(elem, active_cell.data().cell_pos)
         cell.addClass("placed")
-        elem.on('mousedown', function(event){
-          cell.removeClass("placed");
-        })
       }
       else {
         animateElemMove(elem, elem.data().begin_pos)
