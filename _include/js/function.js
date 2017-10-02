@@ -71,3 +71,17 @@ function posElemIsSetka(elem, cell) {
 function animateElemMove(elem, pos) {
   elem.animate({left: pos.left, top: pos.top}, 500, function(){});
 }
+
+function fullSetka(data) {
+  var res = false
+
+  for (i = 0; i < 9; i++) {
+    elem = data.c[i]
+    cell_act = elem.data().cell_act;
+    if (cell_act == undefined) {
+      res = true
+      break;
+    }
+  }
+  return res;
+  }

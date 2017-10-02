@@ -21,21 +21,21 @@ $(document).ready(function() {
     pos = a.position();
     a.data({cell_pos: pos});
     data.s.push(a);
-    pos = data.s[i].data().cell_pos
   }
-  var elems = $('.img'),
-      parent = $('body');
 
+  var elems = $('.img'),
+      parent = $('body'),
+      button = $('button');
 
 
   elems.on('mousedown', function(event) {
     var elem = $(this);
-    pos = elem.data().cell_act;
-    if (typeof elem.data().cell_act != "undefined") {
-      pos.removeClass("placed");
+    cell = elem.data().cell_act;
+    if (typeof cell != "undefined") {
+      cell.removeClass("placed");
     }
-        pos = elem.position();
-        shiftX = event.pageX - pos.left,
+    pos = elem.position();
+    var shiftX = event.pageX - pos.left,
         shiftY = event.pageY - pos.top;
 
     parent.on('mousemove', function(event) {
@@ -62,12 +62,37 @@ $(document).ready(function() {
       }
       if ((active_cell) && (!(active_cell.hasClass("placed")))) {
         elem.data({cell_act: cell});
+        cell.data({index: i})
         animateElemMove(elem, active_cell.data().cell_pos)
         cell.addClass("placed")
       }
       else {
         animateElemMove(elem, elem.data().begin_pos)
       }
+
+      pos = fullSetka(data);
+      if (fullSetka(data)){
+        button.addClass("off")
+      }
+      else {
+        button.removeClass("off")
+      }
+    });
+
+    button.on('click', function(event) {
+      for (var i = 0; i < 9; i++) {
+        elem = data.c[i]
+        cell = elem.data().cell_act
+        cell_index = cell.data().index
+        if (i == cell_index){
+          true;
+        }
+        else {
+          animateElemMove(elem, elem.data().begin_pos)
+          cell.removeClass("placed")
+        }
+      }
+      button.off('click')
     });
   });
 });

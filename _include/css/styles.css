@@ -144,3 +144,13 @@ html, body {
 .box .img8{
   background-image: url('../img/2_2.png');
 }
+.check{
+  border-radius: 30%;
+  width: 80px;
+  height: 40px;
+  background-color: lime;
+}
+.check.off{
+  background-color: gray;
+  pointer-events: none;
+}
