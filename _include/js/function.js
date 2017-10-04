@@ -1,6 +1,6 @@
 function getRand() {
     var left = 555 + Math.floor(Math.random() * (240)),
-        top = 30 + Math.floor(Math.random() * (240));
+        top = 75 + Math.floor(Math.random() * (240));
     return {left: left, top: top};
 }
 
@@ -73,15 +73,44 @@ function animateElemMove(elem, pos) {
 }
 
 function fullSetka(data) {
-  var res = false
+  var res = true
 
   for (i = 0; i < 9; i++) {
-    elem = data.c[i]
-    cell_act = elem.data().cell_act;
-    if (cell_act == undefined) {
-      res = true
+    elem = data.s[i]
+    if (!elem.hasClass("placed")) {
+      res = false
       break;
     }
   }
   return res;
   }
+
+function cellIsCorrect(elem, i) {
+  var res = false
+  cell = elem.data().cell_act
+  cell_index = cell.data().index
+  if (i != cell_index) {
+    res = true
+  }
+  return res;
+}
+
+function buttonError(button) {
+  var error = $.Deferred();
+  button.addClass("red");
+  setTimeout(function() {
+    button.removeClass("red");
+    error.resolve();
+  }, 1000);
+  return error;
+}
+
+function elemInactive(elems) {
+  var inactive = $.Deferred();
+  elems.addClass("inactive");
+  setTimeout(function() {
+    elems.removeClass("inactive");
+    inactive.resolve();
+  }, 4000);
+  return inactive;
+}

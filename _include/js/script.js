@@ -20,6 +20,7 @@ $(document).ready(function() {
     var a = $("<div>").addClass("b b" +i).appendTo(data.setka);
     pos = a.position();
     a.data({cell_pos: pos});
+    a.data({index: i});
     data.s.push(a);
   }
 
@@ -27,6 +28,7 @@ $(document).ready(function() {
       parent = $('body'),
       button = $('button');
 
+  button.addClass("off");
 
   elems.on('mousedown', function(event) {
     var elem = $(this);
@@ -34,6 +36,7 @@ $(document).ready(function() {
     if (typeof cell != "undefined") {
       cell.removeClass("placed");
     }
+
     pos = elem.position();
     var shiftX = event.pageX - pos.left,
         shiftY = event.pageY - pos.top;
@@ -62,7 +65,6 @@ $(document).ready(function() {
       }
       if ((active_cell) && (!(active_cell.hasClass("placed")))) {
         elem.data({cell_act: cell});
-        cell.data({index: i})
         animateElemMove(elem, active_cell.data().cell_pos)
         cell.addClass("placed")
       }
@@ -70,29 +72,39 @@ $(document).ready(function() {
         animateElemMove(elem, elem.data().begin_pos)
       }
 
-      pos = fullSetka(data);
       if (fullSetka(data)){
-        button.addClass("off")
+        button.removeClass("off")
       }
       else {
-        button.removeClass("off")
+        button.addClass("off")
       }
     });
 
     button.on('click', function(event) {
+      right = true
       for (var i = 0; i < 9; i++) {
         elem = data.c[i]
-        cell = elem.data().cell_act
-        cell_index = cell.data().index
-        if (i == cell_index){
-          true;
-        }
-        else {
-          animateElemMove(elem, elem.data().begin_pos)
-          cell.removeClass("placed")
+        if (cellIsCorrect(elem, i)) {
+          right = false;
+          (function(elem) {
+            setTimeout(function() {
+              animateElemMove(elem, elem.data().begin_pos);
+            }, 1500);
+            cell.removeClass("placed");
+          })(elem)
         }
       }
-      button.off('click')
+      if (right){
+        button.off('click');
+        $(".scene").fadeOut(2000);
+      }
+      else {
+        buttonError(button);
+        elemInactive(elems);
+        setTimeout(function() {
+          $(".message").fadeIn(1000);
+        }, 2200);
+      }
     });
   });
 });
